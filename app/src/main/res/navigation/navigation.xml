@@ -32,4 +32,9 @@
             android:name="person"
             app:argType="com.example.fragmentexample.Person" />
     </fragment>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.example.fragmentexample.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" />
 </navigation>

@@ -1,13 +1,12 @@
 package com.example.fragmentexample
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.example.fragmentexample.databinding.FragmentFirstBinding
 
 
@@ -20,7 +19,7 @@ class FirstFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        //use view binding
+        //use view binding to inflate layout
         binding = FragmentFirstBinding.inflate(inflater, container, false)
 
         //passing data
@@ -37,8 +36,19 @@ class FirstFragment : Fragment() {
         //viewModel = ViewModelProvider(requireActivity()).get(MyViewModel::class.java)
         binding.plusButton.setOnClickListener { viewModel.addOne() }
 
-        // Inflate the layout for this fragment
+        //enable option menus
+        setHasOptionsMenu(true)
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.option_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.onNavDestinationSelected(item, requireView().findNavController())
+                ||super.onOptionsItemSelected(item)
     }
 
 }
